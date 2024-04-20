@@ -122,7 +122,7 @@ class StaffAddForm(UserCreationForm):
         registration_date = datetime.now().strftime("%Y")
         total_lecturers_count = User.objects.filter(is_lecturer=True).count()
         generated_username = (
-            f"{settings.LECTURER_ID_PREFIX}-{registration_date}-{total_lecturers_count}"
+            f"{user.email}"
         )
         # Generate a password
         generated_password = User.objects.make_random_password()
@@ -135,8 +135,8 @@ class StaffAddForm(UserCreationForm):
 
             # Send email with the generated credentials
             send_mail(
-                "Your Django LMS account credentials",
-                f"Your username: {generated_username}\nYour password: {generated_password}",
+                "Your IIITA NEP Aviral Account Credentials",
+                f"Your Username: {generated_username}\nYour password: {generated_password}",
                 "from@example.com",
                 [user.email],
                 fail_silently=False,
@@ -282,7 +282,7 @@ class StudentAddForm(UserCreationForm):
         registration_date = datetime.now().strftime("%Y")
         total_students_count = Student.objects.count()
         generated_username = (
-            f"{settings.STUDENT_ID_PREFIX}-{registration_date}-{total_students_count}"
+            f"{user.email}"
         )
         # Generate a password
         generated_password = User.objects.make_random_password()
@@ -300,8 +300,8 @@ class StudentAddForm(UserCreationForm):
 
             # Send email with the generated credentials
             send_mail(
-                "Your Django LMS account credentials",
-                f"Your ID: {generated_username}\nYour password: {generated_password}",
+                "Your IIITA NEP Aviral Account Credentials",
+                f"Your Login ID: {generated_username}\nYour password: {generated_password}",
                 settings.EMAIL_FROM_ADDRESS,
                 [user.email],
                 fail_silently=False,
